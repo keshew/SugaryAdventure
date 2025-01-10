@@ -3,8 +3,16 @@ import SwiftUI
 struct FavoriteReceptView: View {
     @StateObject var favoriteReceptModel =  FavoriteReceptViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    
-    
+    @State var quiz = DishAndQiuzz(imageNameContry: "",
+                                   imageCandy: "",
+                                   imageDish: "", nameOfDish: "",
+                                   historyOfDish: "",
+                                   receptOfDish: "",
+                                   ingredients: "",
+                                   height: 0,
+                                   quizz: Quizzes(questions: [""],
+                                                  answers: [[""]],
+                                                  rightAnswers: [""]))
     
     var body: some View {
         GeometryReader { geometry in
@@ -61,7 +69,7 @@ struct FavoriteReceptView: View {
                                                     .offset(y: 33)
                                             }
                                         }
-                                    
+                                        .disabled(true)
                                     }
                                 }
                                 .padding()
@@ -74,12 +82,12 @@ struct FavoriteReceptView: View {
                     }
                     
                     HStack(spacing: 20) {
-                        MapButton(action: favoriteReceptModel.goToMenu,
+                        MapButton(action: favoriteReceptModel.goToAllRecipes,
                                   image: ImageName.allReceptSymbol.rawValue,
                                   text: "All recipes",
                                   geometry: geometry)
                         
-                        MapButton(action: favoriteReceptModel.goToMenu,
+                        MapButton(action: favoriteReceptModel.goToRandom,
                                   image: ImageName.questionSymbol.rawValue,
                                   text: "Random recipe quizzes",
                                   geometry: geometry,
@@ -90,11 +98,26 @@ struct FavoriteReceptView: View {
                                   image: ImageName.heart.rawValue,
                                   text: "Your favorite",
                                   geometry: geometry)
+                        .opacity(0.5)
+                        .disabled(true)
                     }
                     .position(x: geometry.size.width / 2, y: geometry.size.height / 1.03)
                 }
             }
         }
+        
+        .onAppear {
+            quiz = favoriteReceptModel.returnRandom()
+        }
+        
+        .navigationDestination(isPresented: $favoriteReceptModel.isAllRecipesAvailible) {
+            AllRecipesView()
+        }
+        
+        .navigationDestination(isPresented: $favoriteReceptModel.isRandomAvailible) {
+            QuizzesView(quiz: $quiz)
+        }
+        
         .navigationBarBackButtonHidden(true)
     }
 }

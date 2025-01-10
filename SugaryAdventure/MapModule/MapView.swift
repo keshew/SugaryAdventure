@@ -3,6 +3,16 @@ import SwiftUI
 struct MapView: View {
     @StateObject var mapModel =  MapViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @State var quiz = DishAndQiuzz(imageNameContry: "",
+                                   imageCandy: "",
+                                   imageDish: "", nameOfDish: "",
+                                   historyOfDish: "",
+                                   receptOfDish: "",
+                                   ingredients: "",
+                                   height: 0,
+                                   quizz: Quizzes(questions: [""],
+                                                  answers: [[""]],
+                                                  rightAnswers: [""]))
     
     var body: some View {
         GeometryReader { geometry in
@@ -28,7 +38,7 @@ struct MapView: View {
                                           text: "All recipes",
                                           geometry: geometry)
                                 
-                                MapButton(action: mapModel.goTo,
+                                MapButton(action: mapModel.goToRandom,
                                           image: ImageName.questionSymbol.rawValue,
                                           text: "Random recipe quizzes",
                                           geometry: geometry,
@@ -145,7 +155,11 @@ struct MapView: View {
             }
         }
         .onAppear() {
-            
+            quiz = mapModel.returnRandom()
+        }
+        
+        .navigationDestination(isPresented: $mapModel.isRandomAvailible) {
+            QuizzesView(quiz: $quiz)
         }
         
         .navigationDestination(isPresented: $mapModel.isAllRecipesAvailible) {

@@ -4,7 +4,16 @@ struct AllRecipesView: View {
     @StateObject var allRecipesModel =  AllRecipesViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var showLocked = false
-    
+    @State var quiz = DishAndQiuzz(imageNameContry: "",
+                                   imageCandy: "",
+                                   imageDish: "", nameOfDish: "",
+                                   historyOfDish: "",
+                                   receptOfDish: "",
+                                   ingredients: "",
+                                   height: 0,
+                                   quizz: Quizzes(questions: [""],
+                                                  answers: [[""]],
+                                                  rightAnswers: [""]))
     func goToLocked() {
         showLocked.toggle()
     }
@@ -147,8 +156,9 @@ struct AllRecipesView: View {
                                   text: "All recipes",
                                   geometry: geometry)
                         .opacity(0.5)
+                        .disabled(true)
                         
-                        MapButton(action: allRecipesModel.goToMenu,
+                        MapButton(action: allRecipesModel.goToRandom,
                                   image: ImageName.questionSymbol.rawValue,
                                   text: "Random recipe quizzes",
                                   geometry: geometry,
@@ -164,8 +174,16 @@ struct AllRecipesView: View {
                 }
             }
         }
+        .onAppear {
+            quiz = allRecipesModel.returnRandom()
+        }
+        
         .navigationDestination(isPresented: $allRecipesModel.isAllAvailible) {
             FavoriteReceptView()
+        }
+        
+        .navigationDestination(isPresented: $allRecipesModel.isRandomAvailible) {
+            QuizzesView(quiz: $quiz)
         }
         
         .navigationBarBackButtonHidden(true)
