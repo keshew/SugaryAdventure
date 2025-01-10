@@ -92,7 +92,7 @@ struct CongratulationView: View {
 }
 
 #Preview {
-    @State var dishAndQuiz = DishAndQiuzz(imageNameContry: "",
+    @State var dishAndQuiz = DishAndQiuzz(imageNameContry: "", imageForFav: "",
                                           imageCandy: "",
                                           imageDish: "",
                                           nameOfDish: "",

@@ -3,9 +3,10 @@ import SwiftUI
 struct MapView: View {
     @StateObject var mapModel =  MapViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @State var quiz = DishAndQiuzz(imageNameContry: "",
+    @State var quiz = DishAndQiuzz(imageNameContry: "", imageForFav: "",
                                    imageCandy: "",
-                                   imageDish: "", nameOfDish: "",
+                                   imageDish: "",
+                                   nameOfDish: "",
                                    historyOfDish: "",
                                    receptOfDish: "",
                                    ingredients: "",
@@ -13,6 +14,12 @@ struct MapView: View {
                                    quizz: Quizzes(questions: [""],
                                                   answers: [[""]],
                                                   rightAnswers: [""]))
+    @State var isTapped = false
+    
+    func settings() {
+        isTapped.toggle()
+        
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -53,46 +60,26 @@ struct MapView: View {
                         }
                         
                         Spacer()
-                        VStack {
-                            ZStack {
-                                Image(.backForSettingsButtons)
-                                    .resizable()
-                                    .frame(width: 63, height: 180)
-                                
-                                VStack(spacing: -5) {
-                                    SimpleButtons(action: mapModel.goTo,
-                                                  image: ImageName.gear.rawValue,
-                                                  geometry: geometry)
-                                    
-                                    SimpleButtons(action: mapModel.goTo,
-                                                  image: ImageName.music.rawValue,
-                                                  geometry: geometry)
-                                    
-                                    SimpleButtons(action: mapModel.goTo,
-                                                  image: ImageName.sound.rawValue,
-                                                  geometry: geometry)
-                                }
-                                .offset(x: 2)
-                            }
-                            
-                            VStack(spacing: 0) {
-                                SimpleButtons(action: mapModel.goTo,
-                                              image: ImageName.plus.rawValue,
-                                              geometry: geometry,
-                                              imageSize: 0.067,
-                                              imageForegroundSize: 0.03,
-                                              imageForegroundHSize: 0.03)
-                                
-                                SimpleButtons(action: mapModel.goTo,
-                                              image: ImageName.minus.rawValue,
-                                              geometry: geometry,
-                                              imageSize: 0.067,
-                                              imageForegroundSize: 0.036,
-                                              imageForegroundHSize: 0.008)
-                            }
-                            Spacer()
+                        if isTapped {
+                            Settings(action: {
+                                isTapped.toggle()
+                            }, emptyAction: mapModel.goTo,
+                                     geometry: geometry)
+//                         .transition(.asymmetric(
+//                        insertion: .scale(scale: 0.5).animation(.spring()),
+//                        removal: .scale(scale: 0.0).animation(.spring())
+//                    ))
+                        } else {
+                            ClosedSettingsMap(action: {
+                                isTapped.toggle()
+                            }, emptyAction: mapModel.goTo,
+                                           geometry: geometry)
+//                            .transition(.asymmetric(
+//                                insertion: .scale(scale: 0.5).animation(.easeInOut),
+//                                removal: .scale(scale: 0).animation(.spring())
+//                            ))
                         }
-                        .padding(.top)
+                        
                     }
                     
                     // austria
@@ -138,7 +125,7 @@ struct MapView: View {
                     PinContry(action: mapModel.goToEurope3,
                               x: geometry.size.width / 1.85,
                               y: geometry.size.height / 2.7)
-            
+                    
                     //america
                     PinContry(action: mapModel.goToAmerica1,
                               x: geometry.size.width / 15,
@@ -147,7 +134,7 @@ struct MapView: View {
                     PinContry(action: mapModel.goToAmerica2,
                               x: geometry.size.width / 10,
                               y: geometry.size.height / 4.2)
-              
+                    
                     PinContry(action: mapModel.goToAmerica3,
                               x: geometry.size.width / 30,
                               y: geometry.size.height / 4.6)

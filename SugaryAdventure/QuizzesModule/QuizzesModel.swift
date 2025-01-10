@@ -2,6 +2,7 @@ import SwiftUI
 
 struct DishAndQiuzz {
     var imageNameContry: String
+    var imageForFav: String
     var imageCandy: String
     var imageDish: String
     var nameOfDish: String

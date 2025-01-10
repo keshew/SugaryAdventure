@@ -37,16 +37,17 @@ class MapViewModel: ObservableObject {
                      contact.europe1,
                      contact.europe2,
                      contact.europe3]
-        return array.randomElement() ?? DishAndQiuzz(imageNameContry: "",
-                                                     imageCandy: "",
-                                                     imageDish: "", nameOfDish: "",
-                                                     historyOfDish: "",
-                                                     receptOfDish: "",
-                                                     ingredients: "",
-                                                     height: 0,
-                                                     quizz: Quizzes(questions: [""],
-                                                                    answers: [[""]],
-                                                                    rightAnswers: [""]))
+        return array.randomElement() ?? DishAndQiuzz(imageNameContry: "", imageForFav: "",
+                                                                                  imageCandy: "",
+                                                                                  imageDish: "",
+                                                                                  nameOfDish: "",
+                                                                                  historyOfDish: "",
+                                                                                  receptOfDish: "",
+                                                                                  ingredients: "",
+                                                                                  height: 0,
+                                                                                  quizz: Quizzes(questions: [""],
+                                                                                                 answers: [[""]],
+                                                                                                 rightAnswers: [""]))
     }
     
     func goToFavorite() {

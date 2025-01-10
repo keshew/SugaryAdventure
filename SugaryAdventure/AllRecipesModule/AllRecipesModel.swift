@@ -4,9 +4,10 @@ struct AllRecipesModel {
     let australiaImage = [ImageName.aussieDelight.rawValue]
     let australiaName = ["Aussie Delight"]
     
-    @State var austria = DishAndQiuzz(imageNameContry: ImageName.australiaLabel.rawValue,
+    var austria = DishAndQiuzz(imageNameContry: ImageName.australiaLabel.rawValue,
+                               imageForFav: ImageName.aussieDelight.rawValue,
                                imageCandy: ImageName.candy.rawValue,
-                               imageDish: ImageName.aussieDelight.rawValue,
+                               imageDish: ImageName.quizAustria.rawValue,
                                nameOfDish: "AUSSIE DELIGHT",
                                historyOfDish: "In the heart of Australia, nestled between the vibrant cities and the vast outback, lies a small town named Sweet Haven. This town is renowned for its unique and delicious desserts, which have become a symbol of Australian hospitality and creativity. The story of the Aussie Delight begins with a young pastry chef named Emily, who had a dream to create a dessert that would capture the essence of Australia's diverse flavors and vibrant spirit.",
                                receptOfDish: "\u{2022} Preheat the oven to 350°F (175°C). Grease and flour two 9-inch round cake pans.\n\u{2022} In a large bowl, combine the flour, sugar, cocoa powder, baking powder, baking soda, salt, and espresso powder.\n\u{2022} Add the milk, vegetable oil, eggs, and vanilla extract. Mix until well combined.\n\u{2022} Stir in the boiling water (the batter will be thin).\n\u{2022} Pour the batter into the prepared pans and bake for 30-35 minutes, or until a toothpick inserted into the center comes out clean",
@@ -26,7 +27,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A young pastry chef named Emily",
                                                              "B. Emily's travels across Australia"]))
     
-    @State var europe1 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+    var europe1 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+                               imageForFav: ImageName.tropicalCake.rawValue,
                                imageCandy: ImageName.europeCandy.rawValue,
                                imageDish: ImageName.europe1.rawValue,
                                nameOfDish: "Tropical Sunrise Cake",
@@ -48,7 +50,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["A. The vibrant sunrises of Queensland",
                                                              "B. Pineapple, mango, and kiwi"]))
     
-    @State var europe2 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+    var europe2 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+                               imageForFav: ImageName.unionJake.rawValue,
                                imageCandy: ImageName.europeCandy.rawValue,
                                imageDish: ImageName.europe2.rawValue,
                                nameOfDish: "Union Jack Cupcake",
@@ -70,7 +73,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["A. A British expat living in Sydney",
                                                              "A. The flavors of traditional British baking"]))
     
-    @State var europe3 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+    var europe3 = DishAndQiuzz(imageNameContry: ImageName.europeLabel.rawValue,
+                               imageForFav: ImageName.asia1.rawValue,
                                imageCandy: ImageName.europeCandy.rawValue,
                                imageDish: ImageName.europe3.rawValue,
                                nameOfDish: "Golden Wattle Delight",
@@ -92,7 +96,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["A. Australia's national floral emblem, the golden wattle",
                                                              "A. A pastry chef in Adelaide named Sarah"]))
     
-    @State var africa1 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+    var africa1 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+                               imageForFav: ImageName.africa1.rawValue,
                                imageCandy: ImageName.africaCandy.rawValue,
                                imageDish: ImageName.afric1.rawValue,
                                nameOfDish: "African Sunset Fruit Tart",
@@ -114,7 +119,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["A. A famous TV chef",
                                                              "A. The vibrant sunsets of the African savannah"]))
     
-    @State var africa2 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+    var africa2 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+                               imageForFav: ImageName.africa2.rawValue,
                                imageCandy: ImageName.africaCandy.rawValue,
                                imageDish: ImageName.afric2.rawValue,
                                nameOfDish: "Safari Delight Mango Pudding",
@@ -136,7 +142,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["A. A famous TV chef",
                                                              "A. The vibrant colors and flavors of the African savannah"]))
     
-    @State var africa3 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+    var africa3 = DishAndQiuzz(imageNameContry: ImageName.africaLabel.rawValue,
+                               imageForFav: ImageName.africa3.rawValue,
                                imageCandy: ImageName.africaCandy.rawValue,
                                imageDish: ImageName.afric3.rawValue,
                                nameOfDish: "Savannah Sunrise Fruit Salad",
@@ -158,7 +165,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A passionate chef named Nala",
                                                              "A. The stunning sunrises of the African savannah"]))
     
-    @State var asia1 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+    var asia1 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+                             imageForFav: ImageName.asia1.rawValue,
                                imageCandy: ImageName.asianCandy.rawValue,
                                imageDish: ImageName.asian1.rawValue,
                                nameOfDish: "Jade Dragon Fruit Cake",
@@ -180,7 +188,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A talented pastry chef named Mei Li",
                                                              "A. The rich cultural heritage of China"]))
     
-    @State var asia2 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+    var asia2 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+                             imageForFav: ImageName.asia2.rawValue,
                                imageCandy: ImageName.asianCandy.rawValue,
                                imageDish: ImageName.asian2.rawValue,
                                nameOfDish: "Lucky Red Bean Mooncake",
@@ -202,7 +211,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A skilled baker named Li Wei",
                                                              "A. The traditional Mid-Autumn Festival"]))
     
-    @State var asia3 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+    var asia3 = DishAndQiuzz(imageNameContry: ImageName.asiaLabel.rawValue,
+                             imageForFav: ImageName.asia3.rawValue,
                                imageCandy: ImageName.asianCandy.rawValue,
                                imageDish: ImageName.asian3.rawValue,
                                nameOfDish: "Phoenix Blossom Almond Cake",
@@ -224,7 +234,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A creative baker named Lin Mei",
                                                              "A. The elegance and beauty of the phoenix"]))
     
-    @State var america1 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
+    var america1 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
+                                imageForFav: ImageName.american1.rawValue,
                                imageCandy: ImageName.candyAmerica.rawValue,
                                imageDish: ImageName.america1.rawValue,
                                nameOfDish: "Stars and Stripes Cupcakes",
@@ -246,8 +257,9 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A talented baker named Emily",
                                                              "A. The patriotic spirit of the community"]))
     
-    @State var america2 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
-                               imageCandy: ImageName.candyAmerica.rawValue,
+    var america2 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
+                                imageForFav: ImageName.american2.rawValue,
+                                imageCandy: ImageName.candyAmerica.rawValue,
                                imageDish: ImageName.america2.rawValue,
                                nameOfDish: "Red Velvet Patriot Cupcakes",
                                historyOfDish: "TThe Stars and Stripes Cupcakes were created by a talented baker named Emily, who grew up in a small town in Iowa. Inspired by the patriotic spirit of her community and the vibrant colors of the American flag, Emily wanted to create a dessert that celebrated the pride and unity of her country. She combined a classic vanilla cupcake with a creamy buttercream frosting, decorated with red, white, and blue sprinkles to represent the stars and stripes of the flag. These cupcakes quickly became a hit at local Fourth of July celebrations and are now a beloved treat across the United States.",
@@ -268,7 +280,8 @@ struct AllRecipesModel {
                                               rightAnswers: ["B. A talented baker named Emily",
                                                              "A. The patriotic spirit of the community"]))
     
-    @State var america3 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
+    var america3 = DishAndQiuzz(imageNameContry: ImageName.americaLabel.rawValue,
+                                imageForFav: ImageName.american3.rawValue,
                                imageCandy: ImageName.candyAmerica.rawValue,
                                imageDish: ImageName.america3.rawValue,
                                nameOfDish: "Chocolate Freedom Cupcakes",

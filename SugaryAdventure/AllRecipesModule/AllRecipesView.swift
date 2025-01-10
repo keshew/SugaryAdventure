@@ -4,18 +4,25 @@ struct AllRecipesView: View {
     @StateObject var allRecipesModel =  AllRecipesViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
     @State var showLocked = false
-    @State var quiz = DishAndQiuzz(imageNameContry: "",
-                                   imageCandy: "",
-                                   imageDish: "", nameOfDish: "",
-                                   historyOfDish: "",
-                                   receptOfDish: "",
-                                   ingredients: "",
-                                   height: 0,
-                                   quizz: Quizzes(questions: [""],
-                                                  answers: [[""]],
-                                                  rightAnswers: [""]))
+    @State var isTapped = false
+    @State var quiz = DishAndQiuzz(imageNameContry: "", imageForFav: "",
+                                                                imageCandy: "",
+                                                                imageDish: "",
+                                                                nameOfDish: "",
+                                                                historyOfDish: "",
+                                                                receptOfDish: "",
+                                                                ingredients: "",
+                                                                height: 0,
+                                                                quizz: Quizzes(questions: [""],
+                                                                               answers: [[""]],
+                                                                               rightAnswers: [""]))
     func goToLocked() {
         showLocked.toggle()
+    }
+    
+    func settings() {
+        isTapped.toggle()
+        
     }
     
     var body: some View {
@@ -26,6 +33,22 @@ struct AllRecipesView: View {
                         .resizable()
                         .ignoresSafeArea()
                     
+                            if !isTapped {
+                                VStack {
+                                    SimpleButtons(action: settings,
+                                                  image: ImageName.gear.rawValue,
+                                                  geometry: geometry)
+                                }
+                                .position(x: geometry.size.width / 1, y: geometry.size.height / 8)
+                            } else {
+                                VStack {
+                                    Settings(action: {
+                                        settings()
+                                    }, emptyAction: allRecipesModel.goToMenu, geometry: geometry)
+                                }
+                                .position(x: geometry.size.width / 1.003, y: geometry.size.height / 1.844)
+                            }
+
                     if showLocked {
                         LockedRecipeView(showLocked: $showLocked)
                             .frame(maxWidth: geometry.size.width,
@@ -42,10 +65,6 @@ struct AllRecipesView: View {
                                 .padding(.leading, 230)
                             
                             Spacer()
-                            SimpleButtons(action: allRecipesModel.goToMenu,
-                                          image: ImageName.gear.rawValue,
-                                          geometry: geometry)
-                            .offset(y: -8)
                         }
                         .padding(.top)
                         

@@ -91,6 +91,7 @@ struct CustomItem: View {
                     .offset(y: 28)
             }
         }
+        .disabled(true)
     }
 }
 
@@ -142,5 +143,88 @@ struct PinContry: View {
                 .shadow(radius: 0, y: 4)
         }
         .position(x: x, y: y)
+    }
+}
+
+struct Settings: View {
+    var action: (() -> ())
+    var emptyAction: () -> ()
+    var geometry: GeometryProxy
+    var body: some View {
+        VStack {
+            ZStack {
+                Image(.backForSettingsButtons)
+                    .resizable()
+                    .frame(width: 63, height: 180)
+                
+                VStack(spacing: -5) {
+                    SimpleButtons(action: action,
+                                  image: ImageName.gear.rawValue,
+                                  geometry: geometry)
+                    SimpleButtons(action: emptyAction,
+                                  image: ImageName.music.rawValue,
+                                  geometry: geometry)
+
+                    SimpleButtons(action: emptyAction,
+                                  image: ImageName.sound.rawValue,
+                                  geometry: geometry)
+                }
+                .offset(x: 2)
+            }
+            
+            VStack(spacing: 0) {
+                SimpleButtons(action: emptyAction,
+                              image: ImageName.plus.rawValue,
+                              geometry: geometry,
+                              imageSize: 0.067,
+                              imageForegroundSize: 0.03,
+                              imageForegroundHSize: 0.03)
+                
+                SimpleButtons(action: emptyAction,
+                              image: ImageName.minus.rawValue,
+                              geometry: geometry,
+                              imageSize: 0.067,
+                              imageForegroundSize: 0.036,
+                              imageForegroundHSize: 0.008)
+            }
+            Spacer()
+        }
+        .padding(.top)
+    }
+}
+
+struct ClosedSettingsMap: View {
+    var action: (() -> ())
+    var emptyAction: () -> ()
+    var geometry: GeometryProxy
+    var body: some View {
+        VStack {
+            VStack(spacing: -5) {
+                SimpleButtons(action: action,
+                              image: ImageName.gear.rawValue,
+                              geometry: geometry)
+                .offset(y: -0)
+                
+            }
+            .offset(x: 2)
+            
+            VStack(spacing: 0) {
+                SimpleButtons(action: emptyAction,
+                              image: ImageName.plus.rawValue,
+                              geometry: geometry,
+                              imageSize: 0.067,
+                              imageForegroundSize: 0.03,
+                              imageForegroundHSize: 0.03)
+                
+                SimpleButtons(action: emptyAction,
+                              image: ImageName.minus.rawValue,
+                              geometry: geometry,
+                              imageSize: 0.067,
+                              imageForegroundSize: 0.036,
+                              imageForegroundHSize: 0.008)
+            }
+            Spacer()
+        }
+        .padding(.top)
     }
 }

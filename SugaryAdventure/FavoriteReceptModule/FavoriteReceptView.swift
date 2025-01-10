@@ -3,16 +3,23 @@ import SwiftUI
 struct FavoriteReceptView: View {
     @StateObject var favoriteReceptModel =  FavoriteReceptViewModel()
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    @State var quiz = DishAndQiuzz(imageNameContry: "",
-                                   imageCandy: "",
-                                   imageDish: "", nameOfDish: "",
-                                   historyOfDish: "",
-                                   receptOfDish: "",
-                                   ingredients: "",
-                                   height: 0,
-                                   quizz: Quizzes(questions: [""],
-                                                  answers: [[""]],
-                                                  rightAnswers: [""]))
+    @State var isTapped = false
+    @State var quiz = DishAndQiuzz(imageNameContry: "", imageForFav: "",
+                                                                imageCandy: "",
+                                                                imageDish: "",
+                                                                nameOfDish: "",
+                                                                historyOfDish: "",
+                                                                receptOfDish: "",
+                                                                ingredients: "",
+                                                                height: 0,
+                                                                quizz: Quizzes(questions: [""],
+                                                                               answers: [[""]],
+                                                                               rightAnswers: [""]))
+    
+    func settings() {
+        isTapped.toggle()
+        
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -21,6 +28,23 @@ struct FavoriteReceptView: View {
                     Image(.allRecipeBackground)
                         .resizable()
                         .ignoresSafeArea()
+                    
+                    if !isTapped {
+                        VStack {
+                            SimpleButtons(action: settings,
+                                          image: ImageName.gear.rawValue,
+                                          geometry: geometry)
+                        }
+                        .position(x: geometry.size.width / 1, y: geometry.size.height / 6.5)
+                    } else {
+                        VStack {
+                            Settings(action: {
+                                settings()
+                            }, emptyAction: favoriteReceptModel.goToMenu, geometry: geometry)
+                        }
+                        .zIndex(1)
+                        .position(x: geometry.size.width / 1.003, y: geometry.size.height / 1.915)
+                    }
                     
                     VStack {
                         HStack {
@@ -31,9 +55,6 @@ struct FavoriteReceptView: View {
                                 .padding(.leading, 130)
                             
                             Spacer()
-                            SimpleButtons(action: favoriteReceptModel.goToMenu,
-                                          image: ImageName.gear.rawValue,
-                                          geometry: geometry)
                             .offset(y: -8)
                         }
                         .padding(.top)
@@ -41,12 +62,13 @@ struct FavoriteReceptView: View {
                         VStack {
                             ScrollView {
                                 LazyVGrid(columns: favoriteReceptModel.columns, spacing: 10) {
-                                    ForEach(favoriteReceptModel.contact.arrayItem, id: \.name) { item in
+                                    ForEach(favoriteReceptModel.returnAllRecipes(), id: \.nameOfDish) { item in
                                         Button(action: {
-                                            
+                                            quiz = item
+                                            favoriteReceptModel.isRandomAvailible = true
                                         }) {
                                             ZStack {
-                                                Image(item.image)
+                                                Image(item.imageForFav)
                                                     .resizable()
                                                     .frame(width: 90, height: 100)
                                                 
@@ -60,7 +82,7 @@ struct FavoriteReceptView: View {
                                                     .frame(width: 90, height: 33)
                                                     .offset(y: 33)
                                                 
-                                                Text(item.name)
+                                                Text(item.nameOfDish)
                                                     .Bubble(size: 8)
                                                     .frame(width: 80)
                                                     .lineLimit(2)
@@ -69,7 +91,7 @@ struct FavoriteReceptView: View {
                                                     .offset(y: 33)
                                             }
                                         }
-                                        .disabled(true)
+                                        
                                     }
                                 }
                                 .padding()
